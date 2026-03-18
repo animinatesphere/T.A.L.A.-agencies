@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'EB Garamond', serif;
+    background-color: #FAF7F2;
+    color: #2E0510;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection { background-color: #6B0C22; color: #FAF7F2; }
+
+  ::-webkit-scrollbar       { width: 5px; }
+  ::-webkit-scrollbar-track { background: #EDE4D3; }
+  ::-webkit-scrollbar-thumb { background: #6B0C22; border-radius: 0; }
+}
+
+@layer components {
+
+  /* ── Buttons ── */
+  .btn-crimson {
+    @apply inline-flex items-center justify-center
+           bg-crimson-700 text-ivory-100
+           font-display text-[11px] tracking-[3px] uppercase
+           px-8 py-3.5 border-2 border-crimson-700
+           transition-all duration-300 cursor-pointer
+           hover:bg-crimson-800 hover:border-crimson-800 no-underline;
+  }
+  .btn-outline-ivory {
+    @apply inline-flex items-center justify-center
+           bg-transparent text-ivory-100
+           font-display text-[11px] tracking-[3px] uppercase
+           px-8 py-3.5 border-2 border-ivory-100
+           transition-all duration-300 cursor-pointer
+           hover:bg-ivory-100 hover:text-crimson-700 no-underline;
+  }
+  .btn-outline-crimson {
+    @apply inline-flex items-center justify-center
+           bg-transparent text-crimson-700
+           font-display text-[11px] tracking-[3px] uppercase
+           px-8 py-3.5 border-2 border-crimson-700
+           transition-all duration-300 cursor-pointer
+           hover:bg-crimson-700 hover:text-ivory-100 no-underline;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center
+           font-display text-[11px] tracking-[3px] uppercase font-bold
+           px-8 py-3.5 transition-all duration-300 cursor-pointer no-underline
+           bg-gradient-to-r from-gold-500 to-gold-400 text-crimson-900
+           hover:from-gold-600 hover:to-gold-500;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    @apply inline-flex items-center gap-3
+           font-display text-[10px] tracking-[4px] uppercase text-gold-500 mb-4;
+  }
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    @apply block w-6 h-px bg-gold-500 flex-shrink-0;
+  }
+
+  /* ── Gold divider ── */
+  .gold-divider {
+    @apply w-14 h-0.5 my-5;
+    background: linear-gradient(90deg, #C9A84C, #E8C46A);
+  }
+
+  /* ── Card ── */
+  .card {
+    @apply bg-ivory-100 border border-crimson-700/10
+           transition-all duration-300
+           hover:shadow-lg hover:border-crimson-700/40;
+  }
+
+  /* ── Form inputs ── */
+  .form-input {
+    @apply w-full bg-ivory-100 border border-crimson-700/20
+           px-4 py-3.5 font-body text-base text-crimson-900
+           placeholder:text-ivory-500
+           outline-none transition-colors duration-200
+           focus:border-crimson-700;
+  }
+
+  /* ── Grid texture background ── */
+  .grid-texture {
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+}
+
+@layer utilities {
+  /* Gold gradient text */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #C9A84C, #E8C46A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Dark hero background */
+  .bg-hero-dark {
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(107,12,34,0.85) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 20%, rgba(139,26,48,0.35) 0%, transparent 50%),
+      #1a0309;
+  }
+
+  /* Fade-up animation */
+  .animate-fade-up {
+    animation: fadeUp 0.55s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Spin for loader */
+  .animate-spin-slow {
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+}
