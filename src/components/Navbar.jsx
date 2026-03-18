@@ -17,13 +17,13 @@ export default function Navbar() {
 
   useEffect(() => { setOpen(false) }, [pathname])
 
-  const solid = scrolled || !isHome
-
-  return (
-    <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        ${solid ? 'bg-crimson-950 shadow-lg border-b border-gold-500/15 py-3'
-                : 'bg-transparent py-5'}`}>
+  const solid = scrolled || !isHome || open
+ 
+   return (
+     <>
+       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+         ${solid ? 'bg-crimson-950 shadow-lg border-b border-gold-500/15 py-3'
+                 : 'bg-transparent max-lg:bg-crimson-950/80 py-5'}`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
           {/* Logo */}
