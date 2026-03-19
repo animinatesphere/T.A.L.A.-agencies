@@ -14,8 +14,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-3 no-underline mb-8 group">
-              <div className="w-10 h-10 rounded-sm flex items-center justify-center font-bold text-2xl shadow-lg transition-transform group-hover:scale-110"
-                style={{ backgroundColor: ACCENT, color: '#fff' }}>Q</div>
+              <img 
+                src="/blackquill-logo.png" 
+                alt="BlackQuill Logo" 
+                className="w-12 h-12 object-contain rounded-sm transition-transform group-hover:scale-110 shadow-lg"
+              />
               <div>
                 <p className="font-display text-lg tracking-[4px] font-black leading-none uppercase text-white">BlackQuill</p>
                 <p className="font-display text-[9px] tracking-[2px] leading-none mt-2 uppercase font-bold" style={{ color: ACCENT }}>Digital Studio</p>

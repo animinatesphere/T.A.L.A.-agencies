@@ -28,12 +28,11 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 no-underline">
-          <div
-            className="w-8 h-8 rounded-sm flex items-center justify-center text-white font-bold text-xl"
-            style={{ backgroundColor: '#00C853' }}
-          >
-            Q
-          </div>
+          <img 
+            src="/blackquill-logo.png" 
+            alt="BlackQuill Logo" 
+            className="w-10 h-10 object-contain rounded-sm"
+          />
           <span className="font-display text-white text-lg font-bold tracking-widest uppercase">
             BlackQuill
           </span>
