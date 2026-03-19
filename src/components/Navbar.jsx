@@ -1,83 +1,195 @@
 import React, { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { navLinks } from '../data/index.js'
-import logo from '../assets/unnamed (1)-BNgkJFQz.jpg'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [open,     setOpen]     = useState(false)
+  const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
-  const isHome = pathname === '/'
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 60)
+    const fn = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', fn)
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
   useEffect(() => { setOpen(false) }, [pathname])
 
-  const solid = scrolled || !isHome || open
- 
-   return (
-     <>
-       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
-         ${solid ? 'bg-crimson-950 shadow-lg border-b border-gold-500/15 py-3'
-                 : 'bg-transparent max-lg:bg-crimson-950 py-4'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 no-underline">
-            <div className="w-9 h-9 flex items-center justify-center flex-shrink-0">
-               <img src={logo} alt="" />
-            </div>
-            <div>
-              <p className="font-display text-ivory-100 text-[13px] tracking-[3px] font-bold leading-none">T.A.L.A.</p>
-              <p className="font-serif text-gold-500 text-[10px] tracking-wide leading-none mt-0.5">The Africa Laureate Awards</p>
-            </div>
-          </Link>
-
-          {/* Desktop */}
-          <div className="hidden lg:flex items-center gap-7">
-            {navLinks.map(l => (
-              <NavLink key={l.to} to={l.to}
-                className={({ isActive }) =>
-                  `font-display text-[10px] tracking-[2.5px] uppercase no-underline pb-0.5 transition-all duration-200
-                   ${isActive ? 'text-gold-500 border-b border-gold-500'
-                              : 'text-ivory-200 hover:text-gold-400 border-b border-transparent'}`}>
-                {l.label}
-              </NavLink>
-            ))}
-            <Link to="/awards" className="btn-crimson !py-2.5 !px-5 !text-[10px]">Nominate</Link>
+  return (
+    <>
+      {/* ── Navbar — z-[60] so it always sits ABOVE the overlay ── */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300
+                    py-6 px-10 flex justify-between items-center
+                    border-b border-white/5
+                    ${scrolled ? 'backdrop-blur-md' : ''}`}
+        style={{ backgroundColor: '#003D2B' }}
+      >
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2 no-underline">
+          <div
+            className="w-8 h-8 rounded-sm flex items-center justify-center text-white font-bold text-xl"
+            style={{ backgroundColor: '#00C853' }}
+          >
+            Q
           </div>
+          <span className="font-display text-white text-lg font-bold tracking-widest uppercase">
+            BlackQuill
+          </span>
+        </Link>
 
-          {/* Hamburger */}
-          <button onClick={() => setOpen(!open)}
-            className="lg:hidden text-gold-500 text-2xl leading-none p-1 bg-transparent border-none cursor-pointer"
-            aria-label="Toggle menu">
-            {open ? '✕' : '☰'}
-          </button>
-        </div>
+        {/* Menu Trigger */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex items-center gap-3 text-white font-display text-[10px]
+                     tracking-[4px] uppercase border-none bg-transparent cursor-pointer group"
+        >
+          <span
+            className="transition-colors duration-200"
+            style={{ color: open ? '#00C853' : 'white' }}
+          >
+            {open ? 'Close' : 'Menu'}
+          </span>
+          <div className="flex flex-col gap-1 w-6">
+            <span
+              className="h-px bg-white transition-all duration-300 block"
+              style={{ transform: open ? 'rotate(45deg) translateY(5px)' : 'none' }}
+            />
+            <span
+              className="h-px bg-white transition-all duration-300 block"
+              style={{ opacity: open ? 0 : 1 }}
+            />
+            <span
+              className="h-px bg-white transition-all duration-300 block"
+              style={{ transform: open ? 'rotate(-45deg) translateY(-5px)' : 'none' }}
+            />
+          </div>
+        </button>
       </nav>
 
-      {/* Mobile overlay */}
-      <div className={`fixed inset-0 z-40 bg-crimson-950/98 flex flex-col items-center justify-center gap-8
-                       transition-transform duration-300 ease-in-out
-                       ${open ? 'translate-x-0' : 'translate-x-full'}`}>
-        <button onClick={() => setOpen(false)}
-          className="absolute top-6 right-6 text-gold-500 text-2xl bg-transparent border-none cursor-pointer"
-          aria-label="Close">✕</button>
-        <p className="font-display text-gold-500 text-[11px] tracking-[4px] mb-2">✦ T.A.L.A. ✦</p>
-        {navLinks.map(l => (
-          <NavLink key={l.to} to={l.to}
-            className={({ isActive }) =>
-              `font-serif text-3xl font-semibold no-underline transition-colors
-               ${isActive ? 'text-gold-400' : 'text-ivory-100 hover:text-gold-400'}`}>
-            {l.label}
-          </NavLink>
-        ))}
-        <Link to="/awards" className="btn-crimson mt-4">Nominate Your Work</Link>
-      </div>
+      {/* ── Full-screen overlay — z-[55] so navbar stays on top ── */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[55] flex flex-col lg:flex-row overflow-hidden"
+          >
+            {/* Left Panel */}
+            <motion.div
+              initial={{ x: -30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -30, opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.05 }}
+              className="w-full lg:w-[45%] p-12 lg:p-24 flex flex-col justify-center
+                         border-r border-white/5 overflow-y-auto"
+              style={{ backgroundColor: '#003D2B' }}
+            >
+              <div className="space-y-12">
+                {/* Schedule block */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4 text-white/40 font-display text-[9px] tracking-[4px] uppercase">
+                    <span className="text-xl">📅</span> Let's talk about your goals
+                  </div>
+                  <h2 className="text-3xl lg:text-5xl font-display font-bold text-white leading-tight">
+                    Schedule time <br /> to talk
+                  </h2>
+                  <a
+                    href="https://calendar.google.com/calendar/u/0/appointments/schedules"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block px-8 py-4 text-white font-display text-[10px] tracking-[3px]
+                               uppercase font-bold hover:opacity-90 transition-opacity mt-4 no-underline"
+                    style={{ backgroundColor: '#00C853' }}
+                  >
+                    Book 30 Minutes
+                  </a>
+                  <p className="text-white/60 font-body text-sm mt-6">
+                    Want to talk now? Call us on{' '}
+                    <span className="text-white font-bold">0703 815 1723</span>
+                  </p>
+                </div>
+
+                {/* Strategy block */}
+                <div className="pt-12 border-t border-white/10 space-y-4">
+                  <div className="flex items-center gap-4 text-white/40 font-display text-[9px] tracking-[4px] uppercase">
+                    <span className="text-xl">⚡</span> Limited Time Offer
+                  </div>
+                  <h3 className="text-2xl lg:text-4xl font-display font-bold text-white">
+                    Get a FREE <br /> Strategy Session
+                  </h3>
+                  <p className="text-white/50 font-body text-sm max-w-sm leading-relaxed">
+                    We will understand your business and goals, review your existing
+                    activity, and share strategies to help you get better results.
+                  </p>
+                  <Link
+                    to="/contact"
+                    className="inline-block px-8 py-4 text-white font-display text-[10px]
+                               tracking-[3px] uppercase font-bold hover:opacity-90
+                               transition-opacity mt-4 no-underline"
+                    style={{ backgroundColor: '#00C853' }}
+                  >
+                    Get Started
+                  </Link>
+                  <p className="text-white/40 font-display text-[9px] tracking-[2px] mt-6 uppercase">
+                    Got a brief or RFP? Send it to{' '}
+                    <span className="text-white/80 lowercase">hello@blackquill.digital</span>
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Panel — Nav links */}
+            <motion.div
+              initial={{ x: 30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 30, opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.08 }}
+              className="w-full lg:w-[55%] p-12 lg:p-24 flex flex-col justify-center relative overflow-hidden"
+              style={{ backgroundColor: '#E7F3EF' }}
+            >
+              <p className="font-display text-[9px] tracking-[4px] uppercase mb-10"
+                style={{ color: 'rgba(0,61,43,0.4)' }}>
+                How may we help you?
+              </p>
+
+              <div className="flex flex-col gap-6 lg:gap-10">
+                {navLinks.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    className={({ isActive }) =>
+                      `font-display font-black uppercase tracking-tighter
+                       transition-all duration-300 no-underline
+                       text-4xl lg:text-7xl
+                       ${isActive
+                         ? 'opacity-100'
+                         : 'opacity-30 hover:opacity-100 hover:translate-x-4'
+                       }`
+                    }
+                    style={{ color: '#003D2B' }}
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+              </div>
+
+              {/* Decorative watermark */}
+              <div
+                className="absolute bottom-12 right-0 font-display font-black uppercase
+                           leading-none whitespace-nowrap select-none pointer-events-none
+                           text-[12vh] overflow-hidden"
+                style={{ color: 'rgba(0,61,43,0.06)' }}
+              >
+                Digital Studio
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

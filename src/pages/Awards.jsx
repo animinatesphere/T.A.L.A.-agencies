@@ -8,29 +8,29 @@ export default function Awards() {
 
   return (
     <>
-      <PageHero label="Awards" title="The T.A.L.A. Awards"
-        subtitle="Six categories. One purpose — to elevate the finest voices in African independent publishing.">
-        <div className="flex flex-wrap gap-4 mt-8">
-          <Link to="/contact" className="btn-crimson">Submit a Nomination</Link>
-          <a href="#criteria"  className="btn-outline-ivory">Judging Criteria</a>
+      <PageHero label="Our Standards" title="Project Excellence"
+        subtitle="Specialized website solutions for the book publishing industry. We move beyond the basics and focus on your strategic objectives.">
+        <div className="flex flex-wrap gap-6 mt-10 justify-center">
+          <Link to="/contact" className="btn-quill !px-12 !py-5">Start Your Project</Link>
+          <a href="#criteria" className="border-2 border-white/20 text-white px-10 py-5 font-display text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-quill-dark transition-all no-underline font-bold">Our Criteria</a>
         </div>
       </PageHero>
 
       {/* Categories */}
-      <section className="bg-ivory-100 py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="section-label justify-center">2026 Categories</p>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-crimson-900 tracking-wide">Award Categories</h2>
+      <section className="bg-white py-32">
+        <div className="max-w-7xl mx-auto px-10">
+          <div className="text-center mb-20 text-quill-dark">
+            <p className="section-label !text-quill-dark justify-center">Specializations</p>
+            <h2 className="font-display text-4xl lg:text-8xl font-black tracking-tighter uppercase mb-6">Service Pillars</h2>
             <div className="gold-divider mx-auto" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
             {awardCategories.map((a, i) => (
-              <div key={i} className="flex gap-6 items-start p-8 border border-crimson-700/10 bg-ivory-100 hover:border-crimson-700 hover:bg-ivory-200 transition-all duration-300">
-                <div className="w-14 h-14 flex-shrink-0 bg-crimson-700/6 border border-crimson-700/12 flex items-center justify-center text-2xl">{a.icon}</div>
+              <div key={i} className="flex gap-8 items-start p-10 border border-quill-dark/5 bg-quill-light/10 hover:shadow-2xl hover:border-quill-accent/30 transition-all duration-500 group">
+                <div className="w-16 h-16 flex-shrink-0 bg-quill-dark text-quill-accent flex items-center justify-center text-3xl shadow-xl group-hover:bg-quill-accent group-hover:text-white transition-colors">{a.icon}</div>
                 <div>
-                  <h3 className="font-display text-sm tracking-wide text-crimson-900 mb-2">{a.title}</h3>
-                  <p className="font-body text-[15px] text-crimson-800/58 leading-relaxed">{a.desc}</p>
+                  <h3 className="font-display text-xl tracking-tighter text-quill-dark mb-4 uppercase font-black">{a.title}</h3>
+                  <p className="font-body text-base text-quill-dark/60 leading-relaxed font-medium">{a.desc}</p>
                 </div>
               </div>
             ))}
@@ -39,24 +39,25 @@ export default function Awards() {
       </section>
 
       {/* Timeline */}
-      <section className="bg-crimson-950 py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="section-label justify-center">2026 Calendar</p>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-ivory-100 tracking-wide">Award Timeline</h2>
+      <section className="bg-quill-dark py-32 relative overflow-hidden">
+        <div className="absolute inset-0 grid-texture opacity-10" />
+        <div className="max-w-7xl mx-auto px-10 relative z-10">
+          <div className="text-center mb-20">
+            <p className="section-label justify-center text-quill-accent">Our Process</p>
+            <h2 className="font-display text-4xl lg:text-7xl font-bold text-white tracking-tight uppercase leading-none">Project Lifecycle</h2>
           </div>
-          <div className="max-w-2xl mx-auto relative">
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gold-500/20" />
-            <div className="space-y-10">
+          <div className="max-w-3xl mx-auto relative">
+            <div className="absolute left-10 top-0 bottom-0 w-px bg-white/5" />
+            <div className="space-y-12">
               {awardTimeline.map((t, i) => (
-                <div key={i} className="flex gap-8 items-start">
-                  <div className="w-12 h-12 flex-shrink-0 z-10 bg-gradient-to-br from-gold-500 to-gold-400 text-crimson-900 flex items-center justify-center font-display text-sm font-bold">
+                <div key={i} className="flex gap-12 items-start group">
+                  <div className="w-20 h-20 flex-shrink-0 z-10 bg-white/5 border border-white/10 text-quill-accent flex items-center justify-center font-display text-2xl font-black group-hover:bg-quill-accent group-hover:text-white transition-all shadow-2xl">
                     {String(i + 1).padStart(2, '0')}
                   </div>
-                  <div className="pt-2">
-                    <p className="font-display text-[10px] tracking-[2px] text-gold-500 mb-1">{t.date}</p>
-                    <h3 className="font-display text-base tracking-wide text-ivory-100 mb-1.5">{t.phase}</h3>
-                    <p className="font-body text-[15px] text-ivory-100/55 leading-relaxed">{t.desc}</p>
+                  <div className="pt-4">
+                    <p className="font-display text-[10px] tracking-[4px] text-quill-accent mb-3 uppercase font-bold">{t.date}</p>
+                    <h3 className="font-display text-2xl tracking-tighter text-white mb-3 uppercase font-black">{t.phase}</h3>
+                    <p className="font-body text-lg text-white/50 leading-relaxed italic">"{t.desc}"</p>
                   </div>
                 </div>
               ))}
@@ -66,20 +67,20 @@ export default function Awards() {
       </section>
 
       {/* Criteria */}
-      <section id="criteria" className="bg-ivory-300 py-24">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="section-label justify-center">How We Judge</p>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-crimson-900 tracking-wide">Judging Criteria</h2>
+      <section id="criteria" className="bg-quill-light/20 py-32">
+        <div className="max-w-4xl mx-auto px-10">
+          <div className="text-center mb-20 text-quill-dark">
+            <p className="section-label !text-quill-dark justify-center">Quality Guardrails</p>
+            <h2 className="font-display text-4xl lg:text-7xl font-bold tracking-tight uppercase leading-none">Vetting Process</h2>
             <div className="gold-divider mx-auto" />
           </div>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {judgingCriteria.map((c, i) => (
-              <div key={i} className="flex gap-5 items-start bg-ivory-100 border border-crimson-700/8 p-6">
-                <span className="text-gold-500 text-base flex-shrink-0 mt-0.5">◆</span>
+              <div key={i} className="flex gap-8 items-start bg-white shadow-xl p-10 border border-quill-dark/5 hover:border-quill-accent/30 transition-all group">
+                <span className="text-quill-accent text-2xl flex-shrink-0 mt-1 font-bold">◆</span>
                 <div>
-                  <h4 className="font-display text-[12px] tracking-wide text-crimson-700 mb-1.5">{c.title}</h4>
-                  <p className="font-body text-[15px] text-crimson-800/58 leading-relaxed">{c.desc}</p>
+                  <h4 className="font-display text-lg tracking-tighter text-quill-dark mb-3 uppercase font-black">{c.title}</h4>
+                  <p className="font-body text-base text-quill-dark/60 leading-relaxed font-medium">{c.desc}</p>
                 </div>
               </div>
             ))}
@@ -88,23 +89,23 @@ export default function Awards() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-ivory-100 py-24">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="section-label justify-center">Questions</p>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-crimson-900 tracking-wide">Frequently Asked</h2>
+      <section className="bg-white py-32 border-t border-quill-dark/5">
+        <div className="max-w-4xl mx-auto px-10">
+          <div className="text-center mb-16 text-quill-dark">
+            <p className="section-label !text-quill-dark justify-center">Knowledge Base</p>
+            <h2 className="font-display text-4xl lg:text-7xl font-bold tracking-tight uppercase leading-none">Common Inquiries</h2>
           </div>
-          <div className="divide-y divide-crimson-700/10">
+          <div className="divide-y divide-quill-dark/5">
             {faqs.map((f, i) => (
-              <div key={i}>
+              <div key={i} className="group">
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex justify-between items-center py-5 text-left bg-transparent border-none cursor-pointer">
-                  <span className="font-serif text-lg font-semibold text-crimson-950 hover:text-crimson-700 transition-colors">{f.q}</span>
-                  <span className={`text-crimson-700 text-xl font-bold flex-shrink-0 ml-4 transition-transform duration-300 inline-block ${openFaq === i ? 'rotate-45' : ''}`}>+</span>
+                  className="w-full flex justify-between items-center py-8 text-left bg-transparent border-none cursor-pointer">
+                  <span className="font-display text-xl font-bold text-quill-dark uppercase tracking-tighter group-hover:text-quill-accent transition-colors">{f.q}</span>
+                  <span className={`text-quill-accent text-3xl font-black flex-shrink-0 ml-8 transition-transform duration-300 inline-block ${openFaq === i ? 'rotate-45' : ''}`}>+</span>
                 </button>
                 {openFaq === i && (
-                  <div className="pb-5">
-                    <p className="font-body text-base text-crimson-800/65 leading-relaxed">{f.a}</p>
+                  <div className="pb-10">
+                    <p className="font-body text-lg text-quill-dark/60 leading-relaxed font-medium italic">"{f.a}"</p>
                   </div>
                 )}
               </div>
@@ -114,11 +115,12 @@ export default function Awards() {
       </section>
 
       {/* CTA */}
-      <section className="bg-crimson-700 py-20 text-center">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="font-display text-3xl lg:text-4xl font-bold text-ivory-100 tracking-wide mb-4">Ready to Submit Your Work?</h2>
-          <p className="font-serif text-lg text-ivory-100/70 mb-9">Nominations for 2026 are open now. No submission fee. No barriers.</p>
-          <Link to="/contact" className="btn-outline-ivory">Begin Your Nomination →</Link>
+      <section className="bg-quill-dark py-40 text-center relative overflow-hidden">
+        <div className="absolute inset-0 grid-texture opacity-10" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <h2 className="font-display text-4xl lg:text-8xl font-black text-white tracking-tighter mb-10 uppercase leading-none">Ready to Launch <br/> Your Project?</h2>
+          <p className="font-serif text-2xl lg:text-3xl text-white/50 mb-16 italic max-w-3xl mx-auto">Nigeria’s only agency dedicated to delivering bespoke website and e-commerce projects for the literary world.</p>
+          <Link to="/contact" className="btn-quill !px-20 !py-6 text-sm tracking-[4px]">Initiate Consultation →</Link>
         </div>
       </section>
     </>

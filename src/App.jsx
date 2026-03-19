@@ -9,6 +9,7 @@ import Services from './pages/Services.jsx'
 import About    from './pages/About.jsx'
 import Blog     from './pages/Blog.jsx'
 import Contact  from './pages/Contact.jsx'
+import Admin    from './pages/Admin.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function ScrollToTop() {
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/about"    element={<About />} />
             <Route path="/blog"     element={<Blog />} />
             <Route path="/contact"  element={<Contact />} />
+            <Route path="/admin"    element={<Admin />} />
             <Route path="*"         element={<NotFound />} />
           </Routes>
         </main>
